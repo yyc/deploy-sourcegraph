@@ -6,5 +6,7 @@ bases:
 resources:
   - frontend/sourcegraph-frontend.RoleBinding.yaml
   - prometheus/prometheus.RoleBinding.yaml
+  - prometheus/prometheus.ClusterRoleBinding.yaml
+  - cadvisor/cadvisor.ClusterRoleBinding.yaml
 patchesStrategicMerge:
   - prometheus/prometheus.ConfigMap.yaml
