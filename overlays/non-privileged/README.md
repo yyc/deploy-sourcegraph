@@ -7,7 +7,7 @@ and not require ClusterRole wide privileges when doing service discovery for scr
 To use it, execute the following command from the root directory of this repository:
 
 ```shell script
-./overlay-generate-cluster.sh non-root generated-cluster
+./overlay-generate-cluster.sh non-privileged generated-cluster
 ```
 
 After executing the script you can apply the generated manifests from the `generated-cluster` directory:
