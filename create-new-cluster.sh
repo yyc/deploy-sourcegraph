@@ -14,4 +14,22 @@
 # a YAML file that can be `kubectl apply`d to the cluster, version that file in this repository, and add
 # the relevant `kubectl apply` command to ./kubectl-apply-all.sh
 
-./kubectl-apply-all.sh $@
+#./kubectl-apply-all.sh $@
+
+set -e
+
+# create namespace
+kubectl create namespace sourcegraph
+kubectl label namespace sourcegraph name=sourcegraph
+
+# use namespace overlay
+./overlay-generate-cluster.sh namespaced generated-cluster
+
+# create storageclass
+kubectl apply -f base/sourcegraph.StorageClass.yaml
+
+# use generated-cluster instead of base
+kubectl apply -n sourcegraph --prune -l deploy=sourcegraph -f generated-cluster --recursive
+
+# create load balancer configuration
+./configure/ingress-nginx/install.sh
