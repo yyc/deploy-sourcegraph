@@ -1,0 +1,13 @@
+eksctl create cluster \
+  --name "dev-tools" \
+  --region "us-east-1" \
+  --with-oidc \
+  --ssh-access \
+  --ssh-public-key "dev-productivity" \
+  --managed \
+  --node-type "m5.4xlarge" --nodes-min 3 --nodes 3 --nodes-max 6 \
+  --vpc-private-subnets "subnet-054602184ea123fee,subnet-0f941426f54babcd6" \
+  --node-private-networking \
+  --asg-access \
+  --external-dns-access \
+  --alb-ingress-access
